@@ -12,7 +12,9 @@
         <div class="border-gray-700 border my-3"></div>
 
         <!-- Nav Links -->
-
+        @for (item of items(); track $index) {
+        <app-sidebar-item [item]="item"></app-sidebar-item>
+        }
         <!-- End Nav Links -->
     </nav>
 
