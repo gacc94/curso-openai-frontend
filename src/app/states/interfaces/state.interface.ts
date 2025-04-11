@@ -1,5 +1,5 @@
 import { MenuItem } from './menu-items.interface';
 
-export interface IStateApp {
+export interface StateApp {
     menuItems: MenuItem[];
 }

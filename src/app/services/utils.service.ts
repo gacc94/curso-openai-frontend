@@ -2,9 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { MenuItem } from '../states/interfaces/menu-items.interface';
 import { Router } from '@angular/router';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class UtilsService {
     #router = inject(Router);
 

@@ -1,12 +1,12 @@
 import { Injectable, signal } from '@angular/core';
-import { IStateApp } from '../interfaces/state.interface';
+import { StateApp } from '../interfaces/state.interface';
 import { MenuItem } from '../interfaces/menu-items.interface';
 
 @Injectable({
     providedIn: 'root',
 })
 export class StateService {
-    #state = signal<IStateApp>({
+    #state = signal<StateApp>({
         menuItems: [],
     });
 
