@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { MenuItem } from '../../../states/interfaces/menu-items.interface';
+import { MenuItemState } from '../../../states/interfaces/menu-items.state';
 
 @Component({
     selector: 'app-sidebar-item',
@@ -28,5 +28,5 @@ import { MenuItem } from '../../../states/interfaces/menu-items.interface';
     `,
 })
 export class SidebarItemComponent {
-    menuItem = input.required<MenuItem>({ alias: 'item' });
+    menuItem = input.required<MenuItemState>({ alias: 'item' });
 }

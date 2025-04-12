@@ -1,20 +1,20 @@
 import { Injectable, signal } from '@angular/core';
-import { StateApp } from '../interfaces/state.interface';
-import { MenuItem } from '../interfaces/menu-items.interface';
+import { MenuItemState, AppState } from '../interfaces/';
 
 @Injectable({
     providedIn: 'root',
 })
 export class StateService {
-    #state = signal<StateApp>({
+    #state = signal<AppState>({
         menuItems: [],
+        orthographyMessages: [],
     });
 
-    set menuItems(items: MenuItem[]) {
+    set menuItems(items: MenuItemState[]) {
         this.#state.update((state) => ({ ...state, menuItems: items }));
     }
 
-    get menuItems(): MenuItem[] {
+    get menuItems(): MenuItemState[] {
         return this.#state().menuItems;
     }
 }

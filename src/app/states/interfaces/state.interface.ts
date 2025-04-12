@@ -1,5 +1,7 @@
-import { MenuItem } from './menu-items.interface';
+import { MenuItemState } from './menu-items.state';
+import { OrthographyMessageState } from './orthography.state';
 
-export interface StateApp {
-    menuItems: MenuItem[];
+export interface AppState {
+    menuItems: MenuItemState[];
+    orthographyMessages: OrthographyMessageState[];
 }

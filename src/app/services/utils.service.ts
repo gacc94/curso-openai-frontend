@@ -1,12 +1,12 @@
 import { inject, Injectable } from '@angular/core';
-import { MenuItem } from '../states/interfaces/menu-items.interface';
+import { MenuItemState } from '../states/interfaces/menu-items.state';
 import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class UtilsService {
     #router = inject(Router);
 
-    getMenuItems(): MenuItem[] {
+    getMenuItems(): MenuItemState[] {
         const homeRoute = this.#router.config.find(
             (route) => route.path === ''
         );
@@ -16,7 +16,7 @@ export class UtilsService {
             .filter((route) => route.data && route.path !== '**')
             .map(({ path, data }) => ({
                 path: path!,
-                data: data as MenuItem['data'],
+                data: data as MenuItemState['data'],
             }));
     }
 }

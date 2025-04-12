@@ -1,4 +1,4 @@
-export interface MenuItem {
+export interface MenuItemState {
     path: string;
     data: {
         icon: string;

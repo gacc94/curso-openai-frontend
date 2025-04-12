@@ -8,7 +8,6 @@ import {
 import { Router, RouterModule } from '@angular/router';
 import { SidebarItemComponent } from '../../components/sidebar-item/sidebar-item.component';
 import { StateService } from '../../../states/services/state.service';
-import { MenuItem } from '../../../states/interfaces/menu-items.interface';
 import { UtilsService } from '../../../services/utils.service';
 
 @Component({
