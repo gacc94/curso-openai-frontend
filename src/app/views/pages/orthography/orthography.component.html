@@ -3,39 +3,40 @@
         <div class="grid gap-y-2">
             <!-- Chat Messages -->
             <app-chat-message
-                [text]="'Escrivbe eñ texto que desea que revise'"
-            ></app-chat-message>
+                [text]="'Escribe el texto que desea que revise'"
+            />
 
             <!-- Chat Messages -->
             @for (msg of messages(); track $index) {
             <!--  -->
             @if (msg.isGpt) {
-            <app-chat-message [text]="msg.text" />
+            <!-- <app-chat-message [text]="msg.text" /> -->
+            <app-message-orthography [infoMessage]="msg.info!" />
             } @else {
             <app-my-message [text]="msg.text" />
             } }
             <!-- Loading -->
             @if (isLoading()) {
-            <app-typing-loader></app-typing-loader>
+            <app-typing-loader />
             }
         </div>
     </div>
 
     <!-- Message Box -->
-    <!-- <app-text-message-box
+    <app-text-message-box
         (onMessage)="handleMessage($event)"
-    ></app-text-message-box> -->
+    ></app-text-message-box>
 
-    <app-text-message-box-file
+    <!-- <app-text-message-box-file
         (onMessage)="handleMessage($event)"
-    ></app-text-message-box-file>
+    ></app-text-message-box-file> -->
 
-    <app-text-message-box-select
+    <!-- <app-text-message-box-select
         (onMessage)="handleMessage($event)"
         [options]="[
             { id: '1', text: 'Opción 1' },
             { id: '2', text: 'Opción 2' },
             { id: '3', text: 'Opción 3' }
         ]"
-    ></app-text-message-box-select>
+    ></app-text-message-box-select> -->
 </div>

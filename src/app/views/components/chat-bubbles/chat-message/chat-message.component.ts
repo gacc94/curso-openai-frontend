@@ -1,3 +1,4 @@
+import { MessageInfo } from '@/app/interfaces';
 import { Component, input } from '@angular/core';
 
 @Component({
