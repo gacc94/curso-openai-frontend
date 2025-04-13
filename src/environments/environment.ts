@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3000/';
+const baseUrl = 'http://localhost:3000';
 
 export const environment = {
     name: 'development',
@@ -15,6 +15,7 @@ export const environment = {
         gpt: {
             orthography: `${baseUrl}/gpt/orthography-check`,
             prosCons: `${baseUrl}/gpt/pros-cons-discusser`,
+            prosConsStream: `${baseUrl}/gpt/pros-cons-discusser-stream`,
         },
         orthographyCheck: '/orthography-check',
         grammarCheck: '/grammar-check',

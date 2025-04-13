@@ -1,1 +1,26 @@
-<p>pros-cons-stream works!</p>,
+<div class="chat-container">
+    <div class="chat-messages">
+        <div class="grid gap-y-2">
+            <!-- Chat Messages -->
+            <app-chat-message [text]="'Escribe el texto que desea que revise'" />
+
+            <!-- Chat Messages -->
+            @for (msg of messages(); track $index) {
+            <!--  -->
+            @if (msg.isGpt) {
+            <app-chat-message [text]="msg.infoGpt?.content!" />
+
+            } @else {
+            <app-my-message [text]="msg.infoUser!.text!" />
+            } }
+            <!-- Loading -->
+            @if (isLoading()) {
+            <app-typing-loader />
+            }
+            <h2>{{ message() }}</h2>
+        </div>
+    </div>
+
+    <!-- Message Box -->
+    <app-text-message-box (onMessage)="handleMessage($event)"></app-text-message-box>
+</div>

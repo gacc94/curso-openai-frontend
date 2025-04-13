@@ -15,6 +15,7 @@ export const environment = {
         gpt: {
             orthography: `${baseUrl}/gpt/orthography-check`,
             prosCons: `${baseUrl}/gpt/pros-cons-discusser`,
+            prosConsStream: `${baseUrl}/gpt/pros-cons-discusser-stream`,
         },
         orthographyCheck: '/orthography-check',
         grammarCheck: '/grammar-check',

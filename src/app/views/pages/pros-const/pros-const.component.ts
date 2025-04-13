@@ -25,8 +25,6 @@ export default class ProsConstComponent {
     isLoading = signal<boolean>(false);
 
     handleMessage(prompt: string): void {
-        if (!prompt.trim()) return;
-
         this.isLoading.set(true);
         this.#addUserMessage(prompt);
 
