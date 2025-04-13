@@ -3,7 +3,7 @@ const baseUrl = 'http://localhost:3000/';
 export const environment = {
     name: 'development',
     production: false,
-    api: {
+    apis: {
         auth: {
             login: '/auth/login',
             register: '/auth/register',
@@ -14,6 +14,7 @@ export const environment = {
         },
         gpt: {
             orthography: `${baseUrl}/gpt/orthography-check`,
+            prosCons: `${baseUrl}/gpt/pros-cons-discusser`,
         },
         orthographyCheck: '/orthography-check',
         grammarCheck: '/grammar-check',

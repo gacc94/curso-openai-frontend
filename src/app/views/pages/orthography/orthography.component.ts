@@ -8,7 +8,7 @@ import { Message } from '@interfaces/index';
 import { OpenAiService } from '@services/openai.service';
 import { ChatMessageComponent } from '@/app/views/components/chat-bubbles/chat-message/chat-message.component';
 import { MessageOrthographyComponent } from '../../components/chat-bubbles/message-orthography/message-orthography.component';
-import { OrthographyResponse } from '@/app/services/interfaces/orthography.interface';
+import { OrthographyResponse } from '@/app/services/interfaces/orthography.response';
 import { finalize, firstValueFrom } from 'rxjs';
 import { StateService } from '@/app/states/services/state.service';
 

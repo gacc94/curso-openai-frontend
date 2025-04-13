@@ -1,16 +1,7 @@
-export interface OrthographyMessageState {
-    isGpt: boolean;
-    infoUser?: InfoUser;
-    infoGpt?: InfoGpt;
-}
+import { OrthographyResponse } from '@/app/services/interfaces';
+import { BasemMessageState } from './base-message.state';
 
-export interface InfoUser {
-    text: string;
-}
+export interface OrthographyMessageState
+    extends BasemMessageState<OrtographyInfoState> {}
 
-export interface InfoGpt {
-    userScore: number;
-    errors: string[];
-    message: string;
-    correctedText: string;
-}
+export interface OrtographyInfoState extends OrthographyResponse {}

@@ -3,6 +3,7 @@ import {
     MenuItemState,
     AppState,
     OrthographyMessageState,
+    ProsConsMessageState,
 } from '../interfaces/';
 
 @Injectable({
@@ -12,10 +13,14 @@ export class StateService {
     #state = signal<AppState>({
         menuItems: [],
         orthographyMessages: [],
+        prosConsMessages: [],
     });
 
     set menuItems(items: MenuItemState[]) {
-        this.#state.update((state) => ({ ...state, menuItems: items }));
+        this.#state.update((state: AppState) => ({
+            ...state,
+            menuItems: items,
+        }));
     }
 
     get menuItems(): MenuItemState[] {
@@ -23,13 +28,24 @@ export class StateService {
     }
 
     set orthographyMessage(message: OrthographyMessageState) {
-        this.#state.update((state) => ({
+        this.#state.update((state: AppState) => ({
             ...state,
             orthographyMessages: [...state.orthographyMessages, message],
         }));
     }
 
-    get orthographyMessages() {
+    get orthographyMessages(): OrthographyMessageState[] {
         return this.#state().orthographyMessages;
+    }
+
+    set prosConsMessage(message: ProsConsMessageState) {
+        this.#state.update((state: AppState) => ({
+            ...state,
+            prosConsMessages: [...state.prosConsMessages, message],
+        }));
+    }
+
+    get prosConsMessages(): ProsConsMessageState[] {
+        return this.#state().prosConsMessages;
     }
 }

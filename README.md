@@ -1,59 +1,99 @@
-# AngularOpenaiFrontend
+# Angular OpenAI Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.6.
+This project was generated with [Angular CLI](https://angular.io/cli) version 16.x.x.
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) (v16 or higher)
+- [pnpm](https://pnpm.io/) package manager
+
+## Installation
+
+First, install pnpm if you haven't already:
+
+```bash
+npm install -g pnpm
+```
+
+Then install project dependencies:
+
+```bash
+pnpm install
+```
+
+ngx-markdown
+
+```bash
+pnpm add ngx-markdown
+```
+
 
 ## Development server
 
-To start a local development server, run:
+Run the development server:
 
 ```bash
-ng serve
+pnpm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Build
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Build the project:
 
 ```bash
-ng generate component component-name
+pnpm build
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+The build artifacts will be stored in the `dist/` directory.
 
 ## Running unit tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Execute unit tests via [Karma](https://karma-runner.github.io):
 
 ```bash
-ng test
+pnpm test
 ```
 
 ## Running end-to-end tests
 
-For end-to-end (e2e) testing, run:
+Execute end-to-end tests via [Cypress](https://www.cypress.io/):
 
 ```bash
-ng e2e
+pnpm e2e
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Additional Commands
 
-## Additional Resources
+- `pnpm lint`: Run linting
+- `pnpm watch`: Build in watch mode
+- `pnpm serve:prod`: Serve production build locally
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Further help
+
+To get more help on the Angular CLI use `ng help` or check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Environment Setup
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd angular-openai-frontend
+```
+
+2. Create a `.env` file in the project root:
+```bash
+OPENAI_API_KEY=your_api_key_here
+API_BASE_URL=http://localhost:3000
+```
+
+3. Set up environment variables:
+- Copy `.env.template` to `.env`
+- Fill in your OpenAI API key and other required variables
+
+## Configuration
+
+The application uses environment files located in `src/environments/`:
+- `environment.ts` for development
+- `environment.prod.ts` for production
