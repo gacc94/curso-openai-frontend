@@ -1,5 +1,9 @@
 import { Injectable, signal } from '@angular/core';
-import { MenuItemState, AppState } from '../interfaces/';
+import {
+    MenuItemState,
+    AppState,
+    OrthographyMessageState,
+} from '../interfaces/';
 
 @Injectable({
     providedIn: 'root',
@@ -16,5 +20,16 @@ export class StateService {
 
     get menuItems(): MenuItemState[] {
         return this.#state().menuItems;
+    }
+
+    set orthographyMessage(message: OrthographyMessageState) {
+        this.#state.update((state) => ({
+            ...state,
+            orthographyMessages: [...state.orthographyMessages, message],
+        }));
+    }
+
+    get orthographyMessages() {
+        return this.#state().orthographyMessages;
     }
 }

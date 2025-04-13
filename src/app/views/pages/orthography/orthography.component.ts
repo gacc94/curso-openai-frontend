@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, linkedSignal, signal } from '@angular/core';
 import { MyMessageComponent } from '@/app/views/components/chat-bubbles/my-message/my-message.component';
 import { TypingLoaderComponent } from '@components/typing-loader/typing-loader.component';
 import { TextMessageBoxComponent } from '@components/text-message-box/text-message-box.component';
@@ -9,7 +9,8 @@ import { OpenAiService } from '@services/openai.service';
 import { ChatMessageComponent } from '@/app/views/components/chat-bubbles/chat-message/chat-message.component';
 import { MessageOrthographyComponent } from '../../components/chat-bubbles/message-orthography/message-orthography.component';
 import { OrthographyResponse } from '@/app/services/interfaces/orthography.interface';
-import { firstValueFrom } from 'rxjs';
+import { finalize, firstValueFrom } from 'rxjs';
+import { StateService } from '@/app/states/services/state.service';
 
 @Component({
     selector: 'app-orthography',
@@ -26,46 +27,40 @@ import { firstValueFrom } from 'rxjs';
 })
 export default class OrthographyComponent {
     #openAiService = inject(OpenAiService);
+    #state = inject(StateService);
 
-    messages = signal<Message[]>([]);
+    messages = linkedSignal(() => this.#state.orthographyMessages);
     isLoading = signal<boolean>(false);
 
-    handleMessage(prompt: string) {
+    handleMessage(prompt: string): void {
         if (!prompt.trim()) return;
 
         this.isLoading.set(true);
-        this.addUserMessage(prompt);
+        this.#addUserMessage(prompt);
 
-        this.#openAiService.getOrthographyCheck(prompt).subscribe({
-            next: (response) => {
-                if (!response) throw new Error('No response from service');
-                this.addGptMessage(response);
-            },
-            error: (error) => {
-                console.error('Error in orthography check:', error);
-            },
-            complete: () => {
-                this.isLoading.set(false);
-            },
-        });
+        this.#openAiService
+            .getOrthographyCheck(prompt)
+            .pipe(finalize(() => this.isLoading.set(false)))
+            .subscribe({
+                next: (response) => {
+                    this.#addGptMessage(response);
+                },
+            });
     }
 
-    private addUserMessage(text: string) {
-        this.messages.update((messages) => [
-            ...messages,
-            { isGpt: false, text },
-        ]);
+    #addUserMessage(text: string) {
+        this.#state.orthographyMessage = {
+            isGpt: false,
+            infoUser: {
+                text,
+            },
+        };
     }
 
-    private addGptMessage(response: OrthographyResponse) {
-        const { correctedText, errors, message, userScore } = response;
-        this.messages.update((messages) => [
-            ...messages,
-            {
-                isGpt: true,
-                text: response.message,
-                info: response,
-            },
-        ]);
+    #addGptMessage(response: OrthographyResponse) {
+        this.#state.orthographyMessage = {
+            isGpt: true,
+            infoGpt: response,
+        };
     }
 }

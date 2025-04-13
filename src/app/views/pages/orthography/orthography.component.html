@@ -11,9 +11,9 @@
             <!--  -->
             @if (msg.isGpt) {
             <!-- <app-chat-message [text]="msg.text" /> -->
-            <app-message-orthography [infoMessage]="msg.info!" />
+            <app-message-orthography [infoMessage]="msg.infoGpt!" />
             } @else {
-            <app-my-message [text]="msg.text" />
+            <app-my-message [text]="msg.infoUser!.text!" />
             } }
             <!-- Loading -->
             @if (isLoading()) {
