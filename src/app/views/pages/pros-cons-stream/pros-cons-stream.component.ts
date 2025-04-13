@@ -17,26 +17,28 @@ export default class ProsConsStreamComponent {
     #openAiService = inject(OpenAiService);
     #state = inject(StateService);
 
-    messages = linkedSignal(() => this.#state.prosConsMessages);
+    messages = linkedSignal(() => this.#state.prosConsStreamMessages);
     message = signal('');
     isLoading = signal<boolean>(false);
+
+    #abortController = new AbortController();
 
     handleMessage(prompt: string): void {
         this.isLoading.set(true);
         this.#addUserMessage(prompt);
 
-        this.#openAiService.getProsConsStream(prompt).subscribe({
-            next: (messageRes) => {
-                console.log('message', messageRes);
-                this.message.update((message) => {
-                    return message + messageRes;
-                });
-            },
-        });
+        this.#openAiService
+            .getProsConsStream(prompt, this.#abortController)
+            .pipe(finalize(() => this.isLoading.set(false)))
+            .subscribe({
+                next: (messageRes) => {
+                    console.log(this.messages());
+                },
+            });
     }
 
     #addUserMessage(text: string) {
-        this.#state.prosConsMessage = {
+        this.#state.prosConsStreamMessage = {
             isGpt: false,
             infoUser: {
                 text,

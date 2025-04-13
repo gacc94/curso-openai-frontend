@@ -9,39 +9,62 @@ import { toObservable } from '@angular/core/rxjs-interop';
 export class ProsConsStreamUseCase extends BaseUseCase<ProsConsResponse> {
     #url = environment.apis.gpt.prosConsStream;
 
-    execute(prompt: string): Observable<string> {
+    execute(prompt: string, abortController: AbortController): Observable<string> {
         return new Observable<string>((observer) => {
+            let reader: ReadableStreamDefaultReader<Uint8Array> | undefined;
+
+            const cleanup = () => {
+                if (reader) {
+                    reader.cancel().catch(console.error);
+                }
+            };
+
             fetch(this.#url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ prompt }),
-                // signal: new AbortController().signal,
+                signal: abortController.signal,
             })
                 .then(async (resp) => {
-                    if (!resp.ok) throw new Error(`HTTP error! status: ${resp.status}`);
+                    if (!resp.ok) {
+                        throw new Error(`HTTP error! status: ${resp.status} - ${resp.statusText}`);
+                    }
+                    if (!resp.body) {
+                        throw new Error('Response body is null');
+                    }
 
-                    const reader = resp.body?.getReader();
-                    if (!reader) throw new Error('Failed to get reader from response body');
+                    reader = resp.body.getReader();
+                    const decoder = new TextDecoder();
+                    let buffer = '';
 
-                    const decoder = new TextDecoder('utf-8');
+                    try {
+                        while (true) {
+                            const { done, value } = await reader.read();
+                            if (done) break;
 
-                    while (true) {
-                        const { done, value } = await reader.read();
-                        if (done) {
-                            observer.complete();
-                            break;
+                            const chunk = decoder.decode(value, { stream: true });
+                            buffer += chunk;
+
+                            let result = JSON.parse(JSON.stringify(buffer));
+                            this.#addGptMessage(result);
+                            buffer = '';
+
+                            observer.next(chunk);
                         }
-
-                        const chunk = decoder.decode(value, { stream: true });
-                        observer.next(chunk);
+                        observer.complete();
+                    } catch (error) {
+                        throw error;
                     }
                 })
-                .catch((error) => {
-                    console.error('Error fetching data:', error);
+                .catch((error: Error) => {
+                    console.error('[ProsConsStreamUseCase] Error:', error.message);
                     observer.error(error);
-                });
+                })
+                .finally(cleanup);
+
+            return cleanup;
         });
     }
 

@@ -6,7 +6,7 @@ import { ProsConsStreamMessageState } from '../interfaces/pros-cons-stream.state
     providedIn: 'root',
 })
 export class StateService {
-    #state = signal<AppState>({
+    readonly #state = signal<AppState>({
         menuItems: [],
         orthographyMessages: [],
         prosConsMessages: [],
@@ -46,11 +46,30 @@ export class StateService {
         return this.#state().prosConsMessages;
     }
 
-    set prosConsStreamMessage(message: ProsConsStreamMessageState) {
-        this.#state.update((state: AppState) => ({
-            ...state,
-            prosConsStreamMessage: [...state.prosConsStreamMessage, message],
-        }));
+    set prosConsStreamMessage(prosConsStream: ProsConsStreamMessageState) {
+        this.#state.update((state: AppState) => {
+            const messages = state.prosConsStreamMessage;
+            const lastMessage = messages.at(-1);
+
+            if (!prosConsStream.isGpt || !lastMessage?.infoGpt) {
+                return {
+                    ...state,
+                    prosConsStreamMessage: [...messages, prosConsStream],
+                };
+            }
+
+            messages.pop();
+            return {
+                ...state,
+                prosConsStreamMessage: [
+                    ...messages,
+                    {
+                        isGpt: true,
+                        infoGpt: lastMessage.infoGpt + prosConsStream.infoGpt,
+                    },
+                ],
+            };
+        });
     }
 
     get prosConsStreamMessages(): ProsConsStreamMessageState[] {

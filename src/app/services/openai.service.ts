@@ -18,7 +18,7 @@ export class OpenAiService {
         return this.#prosConsUseCase.execute(prompt);
     }
 
-    getProsConsStream(prompt: string) {
-        return this.#prosConsUseStreamCase.execute(prompt);
+    getProsConsStream(prompt: string, abortController: AbortController) {
+        return this.#prosConsUseStreamCase.execute(prompt, abortController);
     }
 }
