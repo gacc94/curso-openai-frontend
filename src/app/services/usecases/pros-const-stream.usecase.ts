@@ -1,7 +1,7 @@
 import { environment } from '@/environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { ProsConsResponse } from '../interfaces';
+import { ProsConsResponse, ProsConsStreamResponse } from '../interfaces';
 import { BaseUseCase } from './base.usecase';
 import { toObservable } from '@angular/core/rxjs-interop';
 
@@ -45,8 +45,8 @@ export class ProsConsStreamUseCase extends BaseUseCase<ProsConsResponse> {
         });
     }
 
-    #addGptMessage(response: ProsConsResponse): void {
-        this.state.prosConsMessage = {
+    #addGptMessage(response: ProsConsStreamResponse): void {
+        this.state.prosConsStreamMessage = {
             isGpt: true,
             infoGpt: response,
         };
