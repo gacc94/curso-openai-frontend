@@ -41,11 +41,7 @@ export default class OrthographyComponent {
         this.#openAiService
             .getOrthographyCheck(prompt)
             .pipe(finalize(() => this.isLoading.set(false)))
-            .subscribe({
-                next: (response) => {
-                    this.#addGptMessage(response);
-                },
-            });
+            .subscribe();
     }
 
     #addUserMessage(text: string) {
@@ -54,13 +50,6 @@ export default class OrthographyComponent {
             infoUser: {
                 text,
             },
-        };
-    }
-
-    #addGptMessage(response: OrthographyResponse) {
-        this.#state.orthographyMessage = {
-            isGpt: true,
-            infoGpt: response,
         };
     }
 }
