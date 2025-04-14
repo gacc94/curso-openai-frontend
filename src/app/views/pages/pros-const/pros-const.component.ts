@@ -6,40 +6,24 @@ import { TextMessageBoxComponent } from '../../components/text-message-box/text-
 import { OpenAiService } from '@/app/services/openai.service';
 import { StateService } from '@/app/states/services/state.service';
 import { finalize } from 'rxjs';
+import { BasePagesComponent } from '@/app/shared/components/base-page.component';
 
 @Component({
     selector: 'app-pros-const',
-    imports: [
-        ChatMessageComponent,
-        MyMessageComponent,
-        TypingLoaderComponent,
-        TextMessageBoxComponent,
-    ],
+    imports: [ChatMessageComponent, MyMessageComponent, TypingLoaderComponent, TextMessageBoxComponent],
     templateUrl: './pros-const.component.html',
 })
-export default class ProsConstComponent {
-    #openAiService = inject(OpenAiService);
-    #state = inject(StateService);
-
-    messages = linkedSignal(() => this.#state.prosConsMessages);
+export default class ProsConstComponent extends BasePagesComponent {
+    messages = linkedSignal(() => this.state.prosConsMessages);
     isLoading = signal<boolean>(false);
 
     handleMessage(prompt: string): void {
         this.isLoading.set(true);
-        this.#addUserMessage(prompt);
+        this.addUserMessage(prompt, 'prosConsMessage');
 
-        this.#openAiService
+        this.openaiService
             .getProsCons(prompt)
             .pipe(finalize(() => this.isLoading.set(false)))
             .subscribe();
-    }
-
-    #addUserMessage(text: string) {
-        this.#state.prosConsMessage = {
-            isGpt: false,
-            infoUser: {
-                text,
-            },
-        };
     }
 }

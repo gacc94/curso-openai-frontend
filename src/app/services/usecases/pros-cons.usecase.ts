@@ -9,9 +9,7 @@ export class ProsConsUseCase extends BaseUseCase<ProsConsResponse> {
     #url = environment.apis.gpt.prosCons;
 
     execute(prompt: string): Observable<ProsConsResponse> {
-        return this.http
-            .post<ProsConsResponse>(this.#url, { prompt })
-            .pipe(tap((resp) => this.#addGptMessage(resp)));
+        return this.http.post<ProsConsResponse>(this.#url, { prompt }).pipe(tap((resp) => this.#addGptMessage(resp)));
     }
 
     #addGptMessage(response: ProsConsResponse): void {

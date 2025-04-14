@@ -1,16 +1,24 @@
 import { Injectable, signal } from '@angular/core';
-import { MenuItemState, AppState, OrthographyMessageState, ProsConsMessageState } from '../interfaces/';
+import {
+    MenuItemState,
+    AppState,
+    OrthographyMessageState,
+    ProsConsMessageState,
+    TranslateMessageState,
+    IStateService,
+} from '../interfaces/';
 import { ProsConsStreamMessageState } from '../interfaces/pros-cons-stream.state';
 
 @Injectable({
     providedIn: 'root',
 })
-export class StateService {
+export class StateService implements IStateService {
     readonly #state = signal<AppState>({
         menuItems: [],
         orthographyMessages: [],
         prosConsMessages: [],
         prosConsStreamMessage: [],
+        translateMessages: [],
     });
 
     set menuItems(items: MenuItemState[]) {
@@ -74,5 +82,16 @@ export class StateService {
 
     get prosConsStreamMessages(): ProsConsStreamMessageState[] {
         return this.#state().prosConsStreamMessage;
+    }
+
+    set translateMessage(message: TranslateMessageState) {
+        this.#state.update((state: AppState) => ({
+            ...state,
+            translateMessages: [...state.translateMessages, message],
+        }));
+    }
+
+    get translateMessages(): TranslateMessageState[] {
+        return this.#state().translateMessages;
     }
 }
