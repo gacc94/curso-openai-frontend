@@ -11,13 +11,6 @@ export class TranslateUseCase extends BaseUseCase<TranslateResponse> {
     execute(prompt: string, lang: string): Observable<TranslateResponse> {
         return this.http
             .post<TranslateResponse>(this.#url, { prompt, lang })
-            .pipe(tap((resp) => this.#addGptMessage(resp)));
-    }
-
-    #addGptMessage(response: TranslateResponse): void {
-        this.state.translateMessage = {
-            isGpt: true,
-            infoGpt: response,
-        };
+            .pipe(tap((resp) => this.addGptMessage(resp, 'translateMessage')));
     }
 }

@@ -1,5 +1,11 @@
 import { inject, Injectable } from '@angular/core';
-import { OrthographyUsecase, ProsConsStreamUseCase, ProsConsUseCase, TranslateUseCase } from './usecases/';
+import {
+    OrthographyUsecase,
+    ProsConsStreamUseCase,
+    ProsConsUseCase,
+    TextToAudioUseCase,
+    TranslateUseCase,
+} from './usecases/';
 import { Observable } from 'rxjs';
 import { OrthographyResponse, ProsConsResponse, TranslateResponse } from './interfaces';
 
@@ -9,6 +15,7 @@ export class OpenAiService {
     #prosConsUseCase = inject(ProsConsUseCase);
     #prosConsUseStreamCase = inject(ProsConsStreamUseCase);
     #translateUseCase = inject(TranslateUseCase);
+    #textToAudioUseCase = inject(TextToAudioUseCase);
 
     getOrthographyCheck(prompt: string): Observable<OrthographyResponse> {
         return this.#orthographyUseCase.execute(prompt);
@@ -24,5 +31,9 @@ export class OpenAiService {
 
     getTranslate(prompt: string, lang: string): Observable<TranslateResponse> {
         return this.#translateUseCase.execute(prompt, lang);
+    }
+
+    getTextToAudio(prompt: string, voice: string) {
+        return this.#textToAudioUseCase.execute(prompt, voice);
     }
 }

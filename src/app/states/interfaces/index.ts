@@ -4,4 +4,5 @@ export * from './orthography.state';
 export * from './pros-cons-stream.state';
 export * from './pros-cons.state';
 export * from './state.interface';
+export * from './text-to-audio.state';
 export * from './translate.state';
