@@ -1,3 +1,4 @@
+import { ImageGenerateMessageState } from './image-generate.state';
 import { MenuItemState } from './menu-items.state';
 import { OrthographyMessageState } from './orthography.state';
 import { ProsConsStreamMessageState } from './pros-cons-stream.state';
@@ -12,6 +13,7 @@ export interface AppState {
     prosConsStreamMessage: ProsConsStreamMessageState[];
     translateMessages: TranslateMessageState[];
     textToAudioMessages: TextToAudioMessageState[];
+    imageGenerateMessages: ImageGenerateMessageState[];
 }
 
 export interface IStateService {
@@ -20,4 +22,5 @@ export interface IStateService {
     prosConsStreamMessage: ProsConsStreamMessageState;
     translateMessage: TranslateMessageState;
     textToAudioMessage: TextToAudioMessageState;
+    imageGenerateMessage: ImageGenerateMessageState;
 }

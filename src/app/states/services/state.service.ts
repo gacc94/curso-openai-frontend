@@ -7,6 +7,7 @@ import {
     TranslateMessageState,
     IStateService,
     TextToAudioMessageState,
+    ImageGenerateMessageState,
 } from '../interfaces/';
 import { ProsConsStreamMessageState } from '../interfaces/pros-cons-stream.state';
 
@@ -21,6 +22,7 @@ export class StateService implements IStateService {
         prosConsStreamMessage: [],
         translateMessages: [],
         textToAudioMessages: [],
+        imageGenerateMessages: [],
     });
 
     set menuItems(items: MenuItemState[]) {
@@ -106,5 +108,16 @@ export class StateService implements IStateService {
 
     get textToAudioMessages(): TextToAudioMessageState[] {
         return this.#state().textToAudioMessages;
+    }
+
+    set imageGenerateMessage(imageGenerate: ImageGenerateMessageState) {
+        this.#state.update((state: AppState) => ({
+            ...state,
+            imageGenerateMessages: [...state.imageGenerateMessages, imageGenerate],
+        }));
+    }
+
+    get imageGenerateMessages() {
+        return this.#state().imageGenerateMessages;
     }
 }

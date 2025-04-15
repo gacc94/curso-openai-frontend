@@ -1,4 +1,5 @@
 export * from './base-message.state';
+export * from './image-generate.state';
 export * from './menu-items.state';
 export * from './orthography.state';
 export * from './pros-cons-stream.state';

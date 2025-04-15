@@ -9,6 +9,15 @@
 
             @if (audioUrl()) {
             <audio [src]="audioUrl()" autoplay controls class="w-full"></audio>
+            } @if (imageGeneratedUrl()) {
+
+            <div class="mt-4">
+                <img
+                    [src]="imageGeneratedUrl()"
+                    [alt]="'Imagen generada por IA'"
+                    class="w-full h-auto rounded-lg shadow-lg border-2 border-gray-700 hover:border-green-500 transition-all duration-300"
+                />
+            </div>
             }
         </div>
     </div>
