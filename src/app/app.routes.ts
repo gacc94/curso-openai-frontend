@@ -3,13 +3,12 @@ import LayoutComponent from './views/pages/layout/layout.component';
 
 export const routes: Routes = [
     {
-        path: '',
+        path: 'gpt',
         component: LayoutComponent,
         children: [
             {
                 path: 'orthography',
-                loadComponent: () =>
-                    import('./views/pages/orthography/orthography.component'),
+                loadComponent: () => import('./views/pages/orthography/orthography.component'),
                 data: {
                     icon: 'fa-solid fa-spell-check',
                     title: 'Ortografía',
@@ -18,8 +17,7 @@ export const routes: Routes = [
             },
             {
                 path: 'pros-cons',
-                loadComponent: () =>
-                    import('./views/pages/pros-const/pros-const.component'),
+                loadComponent: () => import('./views/pages/pros-const/pros-const.component'),
                 data: {
                     icon: 'fa-solid fa-code-compare',
                     title: 'Pros & Cons',
@@ -28,10 +26,7 @@ export const routes: Routes = [
             },
             {
                 path: 'pros-cons-stream',
-                loadComponent: () =>
-                    import(
-                        './views/pages/pros-cons-stream/pros-cons-stream.component'
-                    ),
+                loadComponent: () => import('./views/pages/pros-cons-stream/pros-cons-stream.component'),
                 data: {
                     icon: 'fa-solid fa-water',
                     title: 'Como stream',
@@ -40,8 +35,7 @@ export const routes: Routes = [
             },
             {
                 path: 'translate',
-                loadComponent: () =>
-                    import('./views/pages/translate/translate.component'),
+                loadComponent: () => import('./views/pages/translate/translate.component'),
                 data: {
                     icon: 'fa-solid fa-language',
                     title: 'Traducir',
@@ -50,10 +44,7 @@ export const routes: Routes = [
             },
             {
                 path: 'text-to-audio',
-                loadComponent: () =>
-                    import(
-                        './views/pages/text-to-audio/text-to-audio.component'
-                    ),
+                loadComponent: () => import('./views/pages/text-to-audio/text-to-audio.component'),
                 data: {
                     icon: 'fa-solid fa-podcast',
                     title: 'Texto a audio',
@@ -62,10 +53,7 @@ export const routes: Routes = [
             },
             {
                 path: 'audio-to-text',
-                loadComponent: () =>
-                    import(
-                        './views/pages/audio-to-text/audio-to-text.component'
-                    ),
+                loadComponent: () => import('./views/pages/audio-to-text/audio-to-text.component'),
                 data: {
                     icon: 'fa-solid fa-comment-dots',
                     title: 'Audio a texto',
@@ -74,10 +62,7 @@ export const routes: Routes = [
             },
             {
                 path: 'image-generation',
-                loadComponent: () =>
-                    import(
-                        './views/pages/image-generation/image-generation.component'
-                    ),
+                loadComponent: () => import('./views/pages/image-generation/image-generation.component'),
                 data: {
                     icon: 'fa-solid fa-image',
                     title: 'Imágenes',
@@ -86,10 +71,7 @@ export const routes: Routes = [
             },
             {
                 path: 'image-tunning',
-                loadComponent: () =>
-                    import(
-                        './views/pages/image-tunning/image-tunning.component'
-                    ),
+                loadComponent: () => import('./views/pages/image-tunning/image-tunning.component'),
                 data: {
                     icon: 'fa-solid fa-wand-magic',
                     title: 'Editar imagen',
@@ -99,8 +81,7 @@ export const routes: Routes = [
 
             {
                 path: 'assistant',
-                loadComponent: () =>
-                    import('./views/pages/assistant/assistant.component'),
+                loadComponent: () => import('./views/pages/assistant/assistant.component'),
                 data: {
                     icon: 'fa-solid fa-user',
                     title: 'Asistente',
@@ -113,5 +94,14 @@ export const routes: Routes = [
                 pathMatch: 'full',
             },
         ],
+    },
+    {
+        path: 'auth',
+        loadChildren: () => import('./core/auth/auth.routes').then((m) => m.authRoutes),
+    },
+    {
+        path: '**',
+        redirectTo: 'auth',
+        pathMatch: 'full',
     },
 ];

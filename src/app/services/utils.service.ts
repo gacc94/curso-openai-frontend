@@ -7,9 +7,7 @@ export class UtilsService {
     #router = inject(Router);
 
     getMenuItems(): MenuItemState[] {
-        const homeRoute = this.#router.config.find(
-            (route) => route.path === ''
-        );
+        const homeRoute = this.#router.config.find((route) => route.path === 'gpt');
         if (!homeRoute?.children) return [];
 
         return homeRoute.children
