@@ -5,9 +5,11 @@
 
 html,
 body {
-    background-color: #000000;
+    background-color: #0f0f1a;
+    background-image: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #0f0f1a 100%);
     color: white;
     font-family: "Open Sans", sans-serif;
+    overflow-x: hidden;
 }
 
 h1 {
@@ -39,11 +41,35 @@ em {
 }
 
 .chat-container {
-    @apply flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-white bg-opacity-5 h-[calc(100vh-90px)] p-4 w-[calc(100vw-500px)];
+    @apply flex flex-col flex-auto flex-shrink-0 rounded-2xl h-[calc(100vh-90px)] p-4 w-[calc(100vw-500px)];
+    background: rgba(30, 30, 50, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .chat-messages {
-    @apply flex flex-col h-full overflow-x-auto mb-4;
+    @apply flex flex-col h-full overflow-x-auto mb-4 px-2;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(139, 92, 246, 0.5) rgba(30, 30, 50, 0.1);
+}
+
+.chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: rgba(30, 30, 50, 0.1);
+    border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.5);
+    border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 92, 246, 0.8);
 }
 
 /* Animations */
@@ -55,8 +81,41 @@ em {
 @keyframes fadeIn {
     0% {
         opacity: 0;
+        transform: translateY(10px);
     }
     100% {
         opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Message animations */
+.message-in {
+    animation: messageIn 0.4s ease-out;
+}
+
+.message-out {
+    animation: messageOut 0.4s ease-out;
+}
+
+@keyframes messageIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes messageOut {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
