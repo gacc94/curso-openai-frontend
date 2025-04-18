@@ -1,21 +1,23 @@
 import { Injectable, computed, inject, linkedSignal, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
+import { Observable, catchError, defer, from, map, of, shareReplay, switchMap, tap, throwError } from 'rxjs';
 import { AuthState, LoginRequest, LoginResponse, RegisterRequest, User } from '../interfaces';
+import { Auth, getRedirectResult, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root',
 })
-export class AuthService{
-    private readonly http = inject(HttpClient);
-
-    // For demo purposes - in a real app, this would come from environment variables
-    private readonly baseUrl = 'https://api.example.com/auth';
+export class AuthService {
+    readonly #auth = inject(Auth);
+    readonly #router = inject(Router);
+    #provider = new GoogleAuthProvider();
 
     // Auth state using signals
     private _authState = signal<AuthState>({
         status: 'checking',
         user: null,
+        errorMessage: undefined,
     });
 
     // Public computed signals
@@ -35,6 +37,7 @@ export class AuthService{
         });
 
         localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
         return true;
     }
 
@@ -63,20 +66,13 @@ export class AuthService{
         );
     }
 
-    loginWithGoogle(): Observable<boolean> {
-        // Mock implementation for demo
-        return of({
-            user: {
-                id: '2',
-                email: 'user@gmail.com',
-                name: 'Google User',
-                photoURL: 'https://ui-avatars.com/api/?name=Google+User&background=4285F4',
-                provider: 'google',
-            },
-            token: 'mock-google-jwt-token',
-        }).pipe(
-            tap(({ token, user }) => this.setAuthentication(user, token)),
-            map(() => true)
+    loginWithGoogle() {
+        this.#provider.addScope('email');
+        return defer(() => signInWithPopup(this.#auth, this.#provider)).pipe(
+            switchMap((auth) => Promise.all([auth.user.getIdToken(), auth.user.getIdTokenResult()])),
+            map(([token, idTokenResult]) => ({ token, idToken: idTokenResult })),
+            tap(({ token, idToken }) => this.setAuthentication(idToken.claims, token)),
+            shareReplay(1)
         );
     }
 

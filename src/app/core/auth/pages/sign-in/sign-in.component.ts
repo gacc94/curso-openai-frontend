@@ -36,9 +36,9 @@ export default class SignInComponent {
         const { email, password } = this.myForm.value;
 
         this.authService.login({ email, password }).subscribe({
-            next: () => {
+            next: (response) => {
                 this.isLoading = false;
-                this.router.navigateByUrl('/');
+                this.router.navigateByUrl('/gpt');
             },
             error: (message) => {
                 this.isLoading = false;
@@ -52,9 +52,10 @@ export default class SignInComponent {
         this.errorMessage = null;
 
         this.authService.loginWithGoogle().subscribe({
-            next: () => {
+            next: (resp) => {
+                console.log(resp);
                 this.isLoading = false;
-                this.router.navigateByUrl('/');
+                this.router.navigateByUrl('/gpt');
             },
             error: (message) => {
                 this.isLoading = false;

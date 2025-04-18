@@ -25,4 +25,12 @@ export const environment = {
         spellingCheck: '/spelling-check',
         translation: '/translation',
     },
+    firebase: {
+        apiKey: 'AIzaSyAvgGy5fw1kpKAr6onnnBFaqY7DX1h4onM',
+        authDomain: 'fir-gpt-f68c2.firebaseapp.com',
+        projectId: 'fir-gpt-f68c2',
+        storageBucket: 'fir-gpt-f68c2.firebasestorage.app',
+        messagingSenderId: '370493938872',
+        appId: '1:370493938872:web:2bc71af405ecd2740ea84d',
+    },
 };
