@@ -2,27 +2,23 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../services';
+import { AuthFacade } from '../../application/auth.facade';
 
 @Component({
-    selector: 'app-sign-up',
+    selector: 'app-sign-in-view',
     standalone: true,
     imports: [CommonModule, ReactiveFormsModule, RouterModule],
-    templateUrl: './sign-up.component.html',
-    styleUrls: ['./sign-up.component.scss'],
+    templateUrl: './sign-in.view.html',
+    styleUrls: ['./sign-in.view.scss'],
 })
-export default class SignUpComponent {
+export default class SignInView {
     private fb = inject(FormBuilder);
-    private authService = inject(AuthService);
+    private authFacade = inject(AuthFacade);
     private router = inject(Router);
 
     public myForm: FormGroup = this.fb.group({
-        name: ['', [Validators.required, Validators.minLength(2)]],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', [Validators.required]],
-    }, {
-        validators: this.passwordsMatchValidator
     });
 
     public isLoading = false;
@@ -37,9 +33,9 @@ export default class SignUpComponent {
         this.isLoading = true;
         this.errorMessage = null;
 
-        const { name, email, password } = this.myForm.value;
+        const { email, password } = this.myForm.value;
 
-        this.authService.register({ name, email, password }).subscribe({
+        this.authFacade.login(email, password).subscribe({
             next: () => {
                 this.isLoading = false;
                 this.router.navigateByUrl('/gpt');
@@ -55,7 +51,7 @@ export default class SignUpComponent {
         this.isLoading = true;
         this.errorMessage = null;
 
-        this.authService.loginWithGoogle().subscribe({
+        this.authFacade.loginWithGoogle().subscribe({
             next: () => {
                 this.isLoading = false;
                 this.router.navigateByUrl('/gpt');
@@ -65,16 +61,5 @@ export default class SignUpComponent {
                 this.errorMessage = message;
             },
         });
-    }
-
-    private passwordsMatchValidator(form: FormGroup) {
-        const password = form.get('password')?.value;
-        const confirmPassword = form.get('confirmPassword')?.value;
-
-        if (password === confirmPassword) {
-            return null;
-        }
-
-        return { passwordMismatch: true };
     }
 }

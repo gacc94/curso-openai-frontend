@@ -22,9 +22,7 @@
 
         <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="auth-form">
             @if (errorMessage) {
-            <div class="error-message">
-                {{ errorMessage }}
-            </div>
+            <div class="error-message">{{ errorMessage }}</div>
             }
 
             <div class="form-group">
@@ -96,7 +94,8 @@
                     placeholder="••••••••"
                     [class.input-error]="(myForm.get('confirmPassword')?.invalid && myForm.get('confirmPassword')?.touched) || (myForm.hasError('passwordMismatch') && myForm.get('confirmPassword')?.touched)"
                 />
-                @if ((myForm.get('confirmPassword')?.invalid && myForm.get('confirmPassword')?.touched) || (myForm.hasError('passwordMismatch') && myForm.get('confirmPassword')?.touched)) {
+                @if ((myForm.get('confirmPassword')?.invalid && myForm.get('confirmPassword')?.touched) ||
+                (myForm.hasError('passwordMismatch') && myForm.get('confirmPassword')?.touched)) {
                 <div class="validation-error">
                     @if (myForm.get('confirmPassword')?.hasError('required')) {
                     <span>Confirmar la contraseña es obligatorio</span>

@@ -1,18 +1,17 @@
 import { Routes } from '@angular/router';
-import LayoutComponent from './pages/layout/layout.component';
 
 export const authRoutes: Routes = [
     {
         path: '',
-        component: LayoutComponent,
+        loadComponent: () => import('./presentation/components/auth-layout.component'),
         children: [
             {
                 path: 'sign-in',
-                loadComponent: () => import('./pages/sign-in/sign-in.component'),
+                loadComponent: () => import('./presentation/views/sign-in.view'),
             },
             {
                 path: 'sign-up',
-                loadComponent: () => import('./pages/sign-up/sign-up.component'),
+                loadComponent: () => import('./presentation/views/sign-up.view'),
             },
             {
                 path: '**',

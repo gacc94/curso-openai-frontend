@@ -1,4 +1,10 @@
-import { ApplicationConfig, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
+import {
+    ApplicationConfig,
+    EnvironmentProviders,
+    importProvidersFrom,
+    provideAppInitializer,
+    provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideMarkdown } from 'ngx-markdown';
 
@@ -9,6 +15,10 @@ import { provideAuth } from '@angular/fire/auth';
 import { initializeFirestore, persistentLocalCache, provideFirestore } from '@angular/fire/firestore';
 import { environment } from '@/environments/environment';
 import { browserSessionPersistence, browserPopupRedirectResolver, initializeAuth } from 'firebase/auth';
+
+// Importaciones para la arquitectura hexagonal
+import { AuthFacade } from './core/auth/application/auth.facade';
+import { AUTH_PROVIDERS } from './core/auth';
 
 const fbApp = () => initializeApp(environment.firebase);
 const authApp = () =>
@@ -22,7 +32,7 @@ const firestoreApp = () =>
         localCache: persistentLocalCache(),
     });
 
-const firebaseProviders = [provideFirebaseApp(fbApp), provideAuth(authApp), provideFirestore(firestoreApp)];
+const firebaseProviders: EnvironmentProviders[] = [provideFirebaseApp(fbApp), provideAuth(authApp), provideFirestore(firestoreApp)];
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -37,5 +47,9 @@ export const appConfig: ApplicationConfig = {
         //TODO: Firebase config start
         ...firebaseProviders,
         //TODO: Firebase config end
+
+        // TODO: Proveedores para la arquitectura hexagonal
+        ...AUTH_PROVIDERS,
+        AuthFacade,
     ],
 };
