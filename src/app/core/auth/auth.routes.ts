@@ -10,12 +10,10 @@ export const authRoutes: Routes = [
                 path: 'sign-in',
                 loadComponent: () => import('./pages/sign-in/sign-in.component'),
             },
-            // {
-            //     path: 'sign-up',
-            //     loadComponent: () => import('./pages/sign-up/sign-up.component'),
-            //     redirectTo: 'sign-in',
-            //     pathMatch: 'full',
-            // },
+            {
+                path: 'sign-up',
+                loadComponent: () => import('./pages/sign-up/sign-up.component'),
+            },
             {
                 path: '**',
                 redirectTo: 'sign-in',
