@@ -89,6 +89,15 @@ export const routes: Routes = [
                 },
             },
             {
+                path: 'math-solve-problems',
+                loadComponent: () => import('./views/pages/math-solve-problems/math-solve-problems.component'),
+                data: {
+                    icon: 'fa-solid fa-calculator',
+                    title: 'Resolver problemas',
+                    description: 'Resolver problemas matemáticos',
+                },
+            },
+            {
                 path: '**',
                 redirectTo: 'orthography',
                 pathMatch: 'full',

@@ -12,17 +12,10 @@ import { MenuItemState } from '../../../states/interfaces/menu-items.state';
             routerLinkActive="bg-gray-800"
             class="flex justify-content-center items-center hover:bg-gray-800 rounded-md p-2 transition-colors duration-200"
         >
-            <i
-                class=" text-2xl mr-4 text-indigo-400"
-                [class]="item.data.icon"
-            ></i>
+            <i class=" text-2xl mr-4 text-indigo-400" [class]="item.data.icon"></i>
             <div class="flex flex-col flex-grow">
-                <span class="text-white text-lg font-semibold">{{
-                    item.data.title
-                }}</span>
-                <span class="text-gray-400 text-sm">{{
-                    item.data.description
-                }}</span>
+                <span class="text-white text-sm font-semibold">{{ item.data.title }}</span>
+                <span class="text-gray-400 text-sm">{{ item.data.description }}</span>
             </div>
         </a>
     `,
