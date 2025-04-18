@@ -17,4 +17,17 @@ export class UtilsService {
                 data: data as MenuItemState['data'],
             }));
     }
+
+    fileToBase64(file?: File): Promise<string | undefined> {
+        if (!file) return Promise.resolve(undefined);
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const base64String = reader.result as string;
+                resolve(base64String);
+            };
+            reader.onerror = (error) => reject(error);
+            reader.readAsDataURL(file);
+        });
+    }
 }

@@ -10,6 +10,7 @@ import {
     ImageGenerateMessageState,
 } from '../interfaces/';
 import { ProsConsStreamMessageState } from '../interfaces/pros-cons-stream.state';
+import { MathSolveProblemMessageState } from '../interfaces/math-solve-problems.state';
 
 @Injectable({
     providedIn: 'root',
@@ -23,6 +24,7 @@ export class StateService implements IStateService {
         translateMessages: [],
         textToAudioMessages: [],
         imageGenerateMessages: [],
+        mathSolveProblemsMessages: [],
     });
 
     set menuItems(items: MenuItemState[]) {
@@ -119,5 +121,16 @@ export class StateService implements IStateService {
 
     get imageGenerateMessages() {
         return this.#state().imageGenerateMessages;
+    }
+
+    set mathSolveProblemsMessage(mathSolveProblem: MathSolveProblemMessageState) {
+        this.#state.update((state: AppState) => ({
+            ...state,
+            mathSolveProblemsMessages: [...state.mathSolveProblemsMessages, mathSolveProblem],
+        }));
+    }
+
+    get mathSolveProblemsMessages() {
+        return this.#state().mathSolveProblemsMessages;
     }
 }

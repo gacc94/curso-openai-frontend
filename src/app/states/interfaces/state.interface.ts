@@ -1,4 +1,5 @@
 import { ImageGenerateMessageState } from './image-generate.state';
+import { MathSolveProblemMessageState } from './math-solve-problems.state';
 import { MenuItemState } from './menu-items.state';
 import { OrthographyMessageState } from './orthography.state';
 import { ProsConsStreamMessageState } from './pros-cons-stream.state';
@@ -14,6 +15,7 @@ export interface AppState {
     translateMessages: TranslateMessageState[];
     textToAudioMessages: TextToAudioMessageState[];
     imageGenerateMessages: ImageGenerateMessageState[];
+    mathSolveProblemsMessages: MathSolveProblemMessageState[];
 }
 
 export interface IStateService {
@@ -23,4 +25,5 @@ export interface IStateService {
     translateMessage: TranslateMessageState;
     textToAudioMessage: TextToAudioMessageState;
     imageGenerateMessage: ImageGenerateMessageState;
+    mathSolveProblemsMessage: MathSolveProblemMessageState;
 }

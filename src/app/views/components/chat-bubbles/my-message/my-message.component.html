@@ -2,19 +2,34 @@
     <div class="flex flex-row-reverse">
         <div
             class="flex items-center justify-center h-10 w-10 rounded-full flex-shrink-0 text-white font-semibold shadow-lg"
-            style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); transition: all 0.3s ease;"
+            style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); transition: all 0.3s ease"
         >
             GU
         </div>
 
         <div
             class="relative mr-3 text-sm pt-3 pb-2 px-5 shadow-lg rounded-2xl"
-            style="background: linear-gradient(135deg, rgba(79, 70, 229, 0.6) 0%, rgba(55, 48, 163, 0.7) 100%); 
-                   border: 1px solid rgba(255, 255, 255, 0.1);
-                   backdrop-filter: blur(10px);
-                   transition: all 0.3s ease;"
+            style="
+                background: linear-gradient(135deg, rgba(79, 70, 229, 0.6) 0%, rgba(55, 48, 163, 0.7) 100%);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                transition: all 0.3s ease;
+            "
         >
-            {{ text() }}
+            {{ infoUser().text }}
+
+            @if (infoUser().imageUrl) {
+            <div
+                class="mt-4 overflow-hidden rounded-lg border-2 border-indigo-300 shadow-lg transition-all duration-300 hover:border-indigo-400"
+            >
+                <img
+                    [src]="infoUser().imageUrl"
+                    alt="User Image"
+                    class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-500"
+                    style="max-height: 300px; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))"
+                />
+            </div>
+            }
         </div>
     </div>
 </div>

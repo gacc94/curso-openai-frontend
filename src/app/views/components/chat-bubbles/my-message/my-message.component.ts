@@ -1,3 +1,4 @@
+import { InfoUser } from '@/app/states/interfaces';
 import { Component, input } from '@angular/core';
 
 @Component({
@@ -7,4 +8,5 @@ import { Component, input } from '@angular/core';
 })
 export class MyMessageComponent {
     text = input.required<string>();
+    infoUser = input.required<InfoUser>();
 }

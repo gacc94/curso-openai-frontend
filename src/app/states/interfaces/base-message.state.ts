@@ -6,4 +6,5 @@ export interface BasemMessageState<T> {
 
 export interface InfoUser {
     text: string;
+    imageUrl?: string;
 }
