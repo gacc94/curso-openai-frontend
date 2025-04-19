@@ -1,6 +1,6 @@
 import { MathSolveProblemsResponse } from '../interfaces';
 
-export const dataMath: MathSolveProblemsResponse = {
+export const dataMath1: MathSolveProblemsResponse = {
     success: true,
     data: {
         transcripcion: 'f(x) = (6x^2 + x)^2 (x^5 + x^6)^4',
@@ -81,4 +81,57 @@ export const dataMath: MathSolveProblemsResponse = {
     },
     originalImage: 'math_problem_1745049994422.png',
     timestamp: new Date('2025-04-19T08:07:01.893Z'),
+};
+
+export const dataMath2: MathSolveProblemsResponse = {
+    success: true,
+    data: {
+        transcripcion: '\\frac{36 \\div 3(8-6)}{6}',
+        tipoProblema: 'Aritmética (Orden de operaciones)',
+        conceptosClave: ['Orden de operaciones', 'Paréntesis', 'División', 'Multiplicación'],
+        solucion: {
+            pasos: [
+                {
+                    numero: 1,
+                    descripcion: '✳️ Resolver la operación dentro del paréntesis',
+                    formula: '8 - 6 = 2',
+                    explicacion: 'Primero resolvemos la operación dentro del paréntesis según la jerarquía de operaciones.',
+                },
+                {
+                    numero: 2,
+                    descripcion: '✳️ Sustituir el resultado en la expresión original',
+                    formula: '\\frac{36 \\div 3 \\times 2}{6}',
+                    explicacion: 'Reemplazamos (8-6) por 2.',
+                },
+                {
+                    numero: 3,
+                    descripcion:
+                        '✳️ Resolver la operación en el numerador siguiendo el orden de operaciones (de izquierda a derecha para división y multiplicación)',
+                    formula: '36 \\div 3 = 12 \\rightarrow 12 \\times 2 = 24',
+                    explicacion: 'Primero dividimos 36 entre 3 y luego multiplicamos el resultado por 2.',
+                },
+                {
+                    numero: 4,
+                    descripcion: '✳️ Escribir la fracción resultante',
+                    formula: '\\frac{24}{6}',
+                    explicacion: 'El numerador es 24 y el denominador es 6.',
+                },
+                {
+                    numero: 5,
+                    descripcion: '✳️ Realizar la división final',
+                    formula: '24 \\div 6 = 4',
+                    explicacion: 'Dividimos el numerador entre el denominador para obtener el resultado final.',
+                },
+            ],
+            respuestaFinal: 'La respuesta final es \\boxed{4}',
+            verificacion:
+                'Puedes verificar resolviendo paso a paso y comprobando que cada operación sigue el orden correcto: primero paréntesis, luego división y multiplicación de izquierda a derecha, y finalmente la división de la fracción.',
+        },
+        metodosAlternativos:
+            'Otra forma sería escribir toda la expresión en una sola línea y aplicar PEMDAS/BODMAS cuidadosamente, pero el procedimiento sería el mismo.',
+        conceptosRelacionados: ['Jerarquía de operaciones', 'Expresiones algebraicas', 'Fracciones'],
+        nivelDificultad: 'Básico',
+    },
+    originalImage: 'math_problem_1745055995891.jpg',
+    timestamp: new Date('2025-04-19T09:47:10.724Z'),
 };

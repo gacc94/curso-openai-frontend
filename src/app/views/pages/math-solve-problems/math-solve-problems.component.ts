@@ -13,6 +13,7 @@ import { MessageMathComponent } from '../../components/chat-bubbles/message-math
     selector: 'app-math-solve-problems',
     imports: [ChatMessageComponent, MyMessageComponent, TypingLoaderComponent, TextMessageBoxFileComponent, MessageMathComponent],
     templateUrl: './math-solve-problems.component.html',
+    styleUrls: ['./math-solve-problems.component.scss'],
 })
 export default class MathSolveProblemsComponent extends BasePagesComponent {
     messages = linkedSignal(() => this.state.mathSolveProblemsMessages);

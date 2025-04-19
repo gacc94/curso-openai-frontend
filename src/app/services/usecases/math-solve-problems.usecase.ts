@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { BaseUseCase } from './base.usecase';
 import { MathSolveProblemsResponse } from '../interfaces';
-import { dataMath } from './data';
+import { dataMath1, dataMath2 } from './data';
 
 @Injectable({
     providedIn: 'root',
@@ -19,7 +19,7 @@ export class MathSolveProblemsUseCase extends BaseUseCase<MathSolveProblemsRespo
 
         if (level) formData.append('level', level);
 
-        return of(dataMath).pipe(
+        return of(dataMath1).pipe(
             tap((response) => {
                 this.addGptMessage(response, 'mathSolveProblemsMessage');
             })
