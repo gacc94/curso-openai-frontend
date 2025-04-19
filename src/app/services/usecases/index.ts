@@ -1,5 +1,6 @@
 export * from './base.usecase';
 export * from './image-generate.usecase';
+export * from './math-solve-problems.usecase';
 export * from './orthography.usecase';
 export * from './pros-cons.usecase';
 export * from './pros-const-stream.usecase';

@@ -1,40 +1,57 @@
 <form
     [formGroup]="form"
     (ngSubmit)="handleSubmit()"
-    class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4"
+    class="flex flex-col items-center rounded-xl bg-white/5 backdrop-blur-sm w-full px-4 pt-4 pb-2 border border-white/10"
 >
-    <div class="mr-3">
-        <button
-            (click)="fileInput.click()"
-            class="flex items-center justify-center text-gray-400"
-        >
-            <i class="fa-solid fa-paperclip text-xl"></i>
-        </button>
-
-        <input
-            type="file"
-            #fileInput
-            hidden
-            (change)="handleSelectedFile($event)"
-        />
-    </div>
-
-    <div class="flex-grow">
-        <div class="relative w-full">
-            <input
-                type="text"
-                autofocus
-                class="flex w-full border rounded-xl text-gray-800 focus:outline-none focus:border-indigo-300 pl-4 h-10"
-                [placeholder]="placeholder()"
-                formControlName="prompt"
-            />
+    <!-- Previsualización de la imagen -->
+    @if (previewUrl()) {
+    <div class="mb-4 w-full relative">
+        <div class="relative rounded-xl overflow-hidden border border-indigo-300/30 shadow-lg w-full max-h-60 flex justify-center">
+            <img [src]="previewUrl()" alt="Vista previa" class="object-contain max-h-60" />
+            <button
+                type="button"
+                (click)="clearFile()"
+                class="absolute top-2 right-2 bg-red-500/80 hover:bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center transition-all duration-200 ease-in-out"
+                title="Eliminar imagen"
+            >
+                <i class="fa-solid fa-times"></i>
+            </button>
         </div>
     </div>
+    }
 
-    <div class="ml-4">
-        <button class="btn-primary" type="submit" [disabled]="form.invalid">
-            <span class="mr-2">Enviar</span>
-            <i class="fa-regular fa-paper-plane"></i>
-        </button>
+    <div class="flex flex-row items-center w-full h-16">
+        <div class="mr-3">
+            <button
+                type="button"
+                (click)="fileInput.click()"
+                class="flex items-center justify-center text-gray-400 hover:text-indigo-400 transition-colors duration-200"
+                [class.text-indigo-500]="form.get('file')?.value"
+                title="Adjuntar archivo"
+            >
+                <i class="fa-solid fa-paperclip text-xl"></i>
+            </button>
+
+            <input type="file" #fileInput hidden (change)="handleSelectedFile($event)" accept="image/*" />
+        </div>
+
+        <div class="flex-grow">
+            <div class="relative w-full">
+                <input
+                    type="text"
+                    autofocus
+                    class="flex w-full border border-white/10 rounded-xl text-gray-200 bg-white/5 focus:outline-none focus:border-indigo-300/70 pl-4 h-10"
+                    [placeholder]="placeholder()"
+                    formControlName="prompt"
+                />
+            </div>
+        </div>
+
+        <div class="ml-4">
+            <button class="btn-primary" type="submit" [disabled]="form.invalid">
+                <span class="mr-2">Enviar</span>
+                <i class="fa-regular fa-paper-plane"></i>
+            </button>
+        </div>
     </div>
 </form>

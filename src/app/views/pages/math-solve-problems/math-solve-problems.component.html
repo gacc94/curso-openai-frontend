@@ -8,12 +8,13 @@
             @for (msg of messages(); track $index) {
             <!--  -->
             @if (msg.isGpt) {
-            <!-- <app-chat-message [text]="msg.text" /> -->
+            <app-chat-message [text]="msg.infoGpt?.data?.solucion!" />
             <!-- <app-message-orthography [infoMessage]="msg.infoGpt?.message!" /> -->
             } @else {
             <app-my-message [text]="msg.infoUser!.text!" [infoUser]="msg.infoUser!" />
             } }
             <!-- Loading -->
+            <!--  -->
             @if (isLoading()) {
             <app-typing-loader />
             }

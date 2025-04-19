@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import {
     ImageGenerateUseCase,
+    MathSolveProblemsUseCase,
     OrthographyUsecase,
     ProsConsStreamUseCase,
     ProsConsUseCase,
@@ -18,6 +19,7 @@ export class OpenAiService {
     #translateUseCase = inject(TranslateUseCase);
     #textToAudioUseCase = inject(TextToAudioUseCase);
     #imageGenerateUseCase = inject(ImageGenerateUseCase);
+    #mathSolveProblemsUseCase = inject(MathSolveProblemsUseCase);
 
     getOrthographyCheck(prompt: string): Observable<OrthographyResponse> {
         return this.#orthographyUseCase.execute(prompt);
@@ -41,5 +43,9 @@ export class OpenAiService {
 
     getImageGenerate(prompt: string) {
         return this.#imageGenerateUseCase.execute(prompt);
+    }
+
+    getMathSolveProblems(file: File, prompt: string, level?: string) {
+        return this.#mathSolveProblemsUseCase.execute(file, prompt, level);
     }
 }

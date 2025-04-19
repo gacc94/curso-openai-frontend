@@ -20,6 +20,9 @@ export const environment = {
             textToAudio: `${baseUrl}/gpt/text-to-audio`,
             imageGenerate: `${baseUrl}/gpt/image-generate`,
         },
+        math: {
+            solveProblem: `${baseUrl}/math/solve-problem`,
+        },
         orthographyCheck: '/orthography-check',
         grammarCheck: '/grammar-check',
         spellingCheck: '/spelling-check',

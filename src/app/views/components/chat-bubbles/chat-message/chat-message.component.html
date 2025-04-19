@@ -1,17 +1,22 @@
 <div class="col-start-1 col-end-9 p-3 rounded-lg message-in">
     <div class="flex flex-row items-start">
-        <div class="flex items-center justify-center h-10 w-10 rounded-full flex-shrink-0 text-white font-semibold shadow-lg" style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); transition: all 0.3s ease;">
+        <div
+            class="flex items-center justify-center h-10 w-10 rounded-full flex-shrink-0 text-white font-semibold shadow-lg"
+            style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); transition: all 0.3s ease"
+        >
             G
         </div>
 
-        <div class="relative ml-3 text-sm pt-3 pb-2 px-5 shadow-lg rounded-2xl" 
-             style="background: linear-gradient(135deg, rgba(55, 65, 81, 0.8) 0%, rgba(17, 24, 39, 0.9) 100%); 
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    backdrop-filter: blur(10px);
-                    transition: all 0.3s ease;">
-            <markdown>
-                {{ text() }}
-            </markdown>
+        <div
+            class="relative ml-3 text-sm pt-3 pb-2 px-5 shadow-lg rounded-2xl"
+            style="
+                background: linear-gradient(135deg, rgba(55, 65, 81, 0.8) 0%, rgba(17, 24, 39, 0.9) 100%);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                transition: all 0.3s ease;
+            "
+        >
+            <markdown [data]="text()"></markdown>
 
             @if (audioUrl()) {
             <audio [src]="audioUrl()" autoplay controls class="w-full"></audio>
@@ -22,7 +27,7 @@
                     [src]="imageGeneratedUrl()"
                     [alt]="'Imagen generada por IA'"
                     class="w-full h-auto rounded-lg shadow-lg border-2 border-indigo-900 hover:border-indigo-400 transition-all duration-300"
-                    style="transform: scale(0.98); transition: transform 0.3s ease;"
+                    style="transform: scale(0.98); transition: transform 0.3s ease"
                     onmouseover="this.style.transform='scale(1)'"
                     onmouseout="this.style.transform='scale(0.98)'"
                 />
