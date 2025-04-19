@@ -1,0 +1,24 @@
+<div class="col-start-1 col-end-9 p-3 rounded-lg message-in">
+    <div class="flex flex-row items-start">
+        <div
+            class="flex items-center justify-center h-10 w-10 rounded-full flex-shrink-0 text-white font-semibold shadow-lg"
+            style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); transition: all 0.3s ease"
+        >
+            G
+        </div>
+
+        <div
+            class="relative ml-3 text-sm pt-3 pb-2 px-5 shadow-lg rounded-2xl"
+            style="
+                background: linear-gradient(135deg, rgba(55, 65, 81, 0.8) 0%, rgba(17, 24, 39, 0.9) 100%);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                transition: all 0.3s ease;
+            "
+        >
+            <div class="mt-4">
+                <p>{{ mesaage()| json}}</p>
+            </div>
+        </div>
+    </div>
+</div>

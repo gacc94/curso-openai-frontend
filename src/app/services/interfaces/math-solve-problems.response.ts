@@ -9,7 +9,7 @@ export interface Data {
     transcripcion: string;
     tipoProblema: string;
     conceptosClave: string[];
-    solucion: string;
+    solucion: Solucion;
     metodosAlternativos: string;
     conceptosRelacionados: string[];
     nivelDificultad: string;

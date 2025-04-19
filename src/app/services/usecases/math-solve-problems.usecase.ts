@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { BaseUseCase } from './base.usecase';
 import { MathSolveProblemsResponse } from '../interfaces';
+import { dataMath } from './data';
 
 @Injectable({
     providedIn: 'root',
@@ -18,10 +19,15 @@ export class MathSolveProblemsUseCase extends BaseUseCase<MathSolveProblemsRespo
 
         if (level) formData.append('level', level);
 
-        return this.http.post<MathSolveProblemsResponse>(this.#url, formData).pipe(
+        return of(dataMath).pipe(
             tap((response) => {
                 this.addGptMessage(response, 'mathSolveProblemsMessage');
             })
         );
+        // return this.http.post<MathSolveProblemsResponse>(this.#url, formData).pipe(
+        //     tap((response) => {
+        //         this.addGptMessage(response, 'mathSolveProblemsMessage');
+        //     })
+        // );
     }
 }

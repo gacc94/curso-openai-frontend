@@ -8,8 +8,8 @@
             @for (msg of messages(); track $index) {
             <!--  -->
             @if (msg.isGpt) {
-            <app-chat-message [text]="msg.infoGpt?.data?.solucion!" />
-            <!-- <app-message-orthography [infoMessage]="msg.infoGpt?.message!" /> -->
+            <!-- <app-chat-message [text]="msg.infoGpt?.data?.solucion!" /> -->
+            <app-message-math [mesaage]="msg.infoGpt!" />
             } @else {
             <app-my-message [text]="msg.infoUser!.text!" [infoUser]="msg.infoUser!" />
             } }
